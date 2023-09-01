@@ -10,8 +10,8 @@ function nastav_parametry_motoru () {
     NO_SPEED = 90
     RIGHT_FORWARD_LOW = 120
     RIGHT_FORWARD_HIGH = 130
-    RIGHT_BACKWARD_LOW = 50
-    RIGHT_BACKWARD_HIGH = 60
+    RIGHT_BACKWARD_LOW = 60
+    RIGHT_BACKWARD_HIGH = 50
 }
 function dopredu_dozadu () {
     if (y_pos == 0) {
