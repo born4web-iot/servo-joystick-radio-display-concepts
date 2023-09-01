@@ -1,3 +1,40 @@
+function nastav_parametry_motoru () {
+    left_speed = 90
+    right_speed = 90
+    x_pos = 2
+    y_pos = 2
+    LEFT_FORWARD_LOW = 60
+    LEFT_FORWARD_HIGH = 50
+    LEFT_BACKWORD_LOW = 120
+    LEFT_BACKWORD_HIGH = 130
+    NO_SPEED = 90
+    RIGHT_FORWARD_LOW = 60
+    RIGHT_FORWAD_HIGH = 50
+    RIGHT_FORWARD_LOW = 120
+    RIGHT_BACKWORD_HIGH = 130
+}
+function dopredu_dozadu () {
+    if (y_pos == 0) {
+        left_speed = LEFT_FORWARD_HIGH
+        right_speed = RIGHT_FORWAD_HIGH
+    }
+    if (y_pos == 1) {
+        left_speed = LEFT_FORWARD_LOW
+        right_speed = RIGHT_FORWARD_LOW
+    }
+    if (y_pos == 2) {
+        left_speed = NO_SPEED
+        right_speed = NO_SPEED
+    }
+    if (y_pos == 3) {
+        left_speed = LEFT_BACKWORD_LOW
+        right_speed = RIGHT_BACKWORD_LOW
+    }
+    if (y_pos == 4) {
+        left_speed = LEFT_BACKWORD_HIGH
+        right_speed = RIGHT_BACKWORD_HIGH
+    }
+}
 radio.onReceivedValue(function (name, value) {
     if (name == "x_pos") {
         x_pos = value
@@ -6,25 +43,54 @@ radio.onReceivedValue(function (name, value) {
         y_pos = value
     }
 })
-function X_Speed () {
-    if (y_pos == 0) {
-        left_speed = 50
+function doleva_doprava () {
+    if (x_pos == 0) {
+        left_speed = NO_SPEED
     }
-    if (y_pos == 1) {
-        left_speed = 60
+    if (x_pos == 1) {
+        if (y_pos == 0) {
+            left_speed = LEFT_FORWARD_LOW
+        }
+        if (y_pos == 1) {
+            left_speed = NO_SPEED
+        }
+        if (y_pos == 3) {
+            left_speed = NO_SPEED
+        }
+        if (y_pos == 4) {
+            left_speed = LEFT_FORWARD_LOW
+        }
     }
-    if (y_pos == 2) {
-        left_speed = 90
+    if (x_pos == 3) {
+        if (y_pos == 0) {
+            right_speed = RIGHT_FORWARD_LOW
+        }
+        if (y_pos == 1) {
+            right_speed = NO_SPEED
+        }
+        if (y_pos == 3) {
+            right_speed = NO_SPEED
+        }
+        if (y_pos == 4) {
+            right_speed = RIGHT_BACKWORD_LOW
+        }
     }
-    if (y_pos == 3) {
-        left_speed = 120
-    }
-    if (y_pos == 4) {
-        left_speed = 130
+    if (x_pos == 4) {
+        right_speed = NO_SPEED
     }
 }
+let RIGHT_BACKWORD_LOW = 0
+let RIGHT_BACKWORD_HIGH = 0
+let RIGHT_FORWAD_HIGH = 0
+let RIGHT_FORWARD_LOW = 0
+let NO_SPEED = 0
+let LEFT_BACKWORD_HIGH = 0
+let LEFT_BACKWORD_LOW = 0
+let LEFT_FORWARD_HIGH = 0
+let LEFT_FORWARD_LOW = 0
 let y_pos = 0
 let x_pos = 0
+let right_speed = 0
 let left_speed = 0
 radio.setGroup(5)
 basic.showIcon(IconNames.SmallDiamond)
@@ -33,14 +99,13 @@ basic.clearScreen()
 Kitronik_VIEWTEXT32.showString("Zaciname !")
 basic.pause(500)
 Kitronik_VIEWTEXT32.clearDisplay()
-left_speed = 90
-let right_speed = 90
-x_pos = 2
-y_pos = 2
+nastav_parametry_motoru()
 basic.forever(function () {
     Kitronik_VIEWTEXT32.displaySingleLineString(Kitronik_VIEWTEXT32.DisplayLine.Top, "X: " + x_pos)
     Kitronik_VIEWTEXT32.displaySingleLineString(Kitronik_VIEWTEXT32.DisplayLine.Bottom, "Y: " + y_pos)
-    X_Speed()
+    dopredu_dozadu()
+    doleva_doprava()
     servos.P0.setAngle(left_speed)
+    servos.P1.setAngle(right_speed)
     basic.pause(500)
 })
