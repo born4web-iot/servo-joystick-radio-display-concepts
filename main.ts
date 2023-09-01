@@ -58,7 +58,7 @@ function doleva_doprava () {
             left_speed = NO_SPEED
         }
         if (y_pos == 4) {
-            left_speed = LEFT_FORWARD_LOW
+            left_speed = LEFT_BACKWORD_LOW
         }
     }
     if (x_pos == 3) {
