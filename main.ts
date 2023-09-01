@@ -5,18 +5,18 @@ function nastav_parametry_motoru () {
     y_pos = 2
     LEFT_FORWARD_LOW = 60
     LEFT_FORWARD_HIGH = 50
-    LEFT_BACKWORD_LOW = 120
-    LEFT_BACKWORD_HIGH = 130
+    LEFT_BACKWARD_LOW = 120
+    LEFT_BACKWARD_HIGH = 130
     NO_SPEED = 90
-    RIGHT_FORWARD_LOW = 60
-    RIGHT_FORWAD_HIGH = 50
     RIGHT_FORWARD_LOW = 120
-    RIGHT_BACKWORD_HIGH = 130
+    RIGHT_FORWARD_HIGH = 130
+    RIGHT_BACKWARD_LOW = 50
+    RIGHT_BACKWARD_HIGH = 60
 }
 function dopredu_dozadu () {
     if (y_pos == 0) {
         left_speed = LEFT_FORWARD_HIGH
-        right_speed = RIGHT_FORWAD_HIGH
+        right_speed = RIGHT_FORWARD_HIGH
     }
     if (y_pos == 1) {
         left_speed = LEFT_FORWARD_LOW
@@ -27,12 +27,12 @@ function dopredu_dozadu () {
         right_speed = NO_SPEED
     }
     if (y_pos == 3) {
-        left_speed = LEFT_BACKWORD_LOW
-        right_speed = RIGHT_BACKWORD_LOW
+        left_speed = LEFT_BACKWARD_LOW
+        right_speed = RIGHT_BACKWARD_LOW
     }
     if (y_pos == 4) {
-        left_speed = LEFT_BACKWORD_HIGH
-        right_speed = RIGHT_BACKWORD_HIGH
+        left_speed = LEFT_BACKWARD_HIGH
+        right_speed = RIGHT_BACKWARD_HIGH
     }
 }
 radio.onReceivedValue(function (name, value) {
@@ -58,7 +58,7 @@ function doleva_doprava () {
             left_speed = NO_SPEED
         }
         if (y_pos == 4) {
-            left_speed = LEFT_BACKWORD_LOW
+            left_speed = LEFT_BACKWARD_LOW
         }
     }
     if (x_pos == 3) {
@@ -72,20 +72,20 @@ function doleva_doprava () {
             right_speed = NO_SPEED
         }
         if (y_pos == 4) {
-            right_speed = RIGHT_BACKWORD_LOW
+            right_speed = RIGHT_BACKWARD_LOW
         }
     }
     if (x_pos == 4) {
         right_speed = NO_SPEED
     }
 }
-let RIGHT_BACKWORD_LOW = 0
-let RIGHT_BACKWORD_HIGH = 0
-let RIGHT_FORWAD_HIGH = 0
+let RIGHT_BACKWARD_HIGH = 0
+let RIGHT_BACKWARD_LOW = 0
+let RIGHT_FORWARD_HIGH = 0
 let RIGHT_FORWARD_LOW = 0
 let NO_SPEED = 0
-let LEFT_BACKWORD_HIGH = 0
-let LEFT_BACKWORD_LOW = 0
+let LEFT_BACKWARD_HIGH = 0
+let LEFT_BACKWARD_LOW = 0
 let LEFT_FORWARD_HIGH = 0
 let LEFT_FORWARD_LOW = 0
 let y_pos = 0
@@ -107,5 +107,5 @@ basic.forever(function () {
     doleva_doprava()
     servos.P0.setAngle(left_speed)
     servos.P1.setAngle(right_speed)
-    basic.pause(500)
+    basic.pause(200)
 })
