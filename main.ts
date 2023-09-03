@@ -3,15 +3,15 @@ function nastav_parametry_motoru () {
     right_speed = 90
     x_pos = 2
     y_pos = 2
-    LEFT_FORWARD_LOW = 60
-    LEFT_FORWARD_HIGH = 50
-    LEFT_BACKWARD_LOW = 120
-    LEFT_BACKWARD_HIGH = 130
+    LEFT_FORWARD_LOW = 120
+    LEFT_FORWARD_HIGH = 130
+    LEFT_BACKWARD_LOW = 60
+    LEFT_BACKWARD_HIGH = 50
     NO_SPEED = 90
-    RIGHT_FORWARD_LOW = 120
-    RIGHT_FORWARD_HIGH = 130
-    RIGHT_BACKWARD_LOW = 60
-    RIGHT_BACKWARD_HIGH = 50
+    RIGHT_FORWARD_LOW = 60
+    RIGHT_FORWARD_HIGH = 50
+    RIGHT_BACKWARD_LOW = 120
+    RIGHT_BACKWARD_HIGH = 130
 }
 function dopredu_dozadu () {
     if (y_pos == 0) {
